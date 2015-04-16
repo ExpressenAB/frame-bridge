@@ -93,7 +93,7 @@ var localApi = {
 };
 ```
 
-**The value will always be returned as a promise on the calling side of the bridge:**
+**The value will always be returned as a promise on the calling side of the bridge**
 
 ```javascript
 remoteApi.getReturnValue().success(function(returnValue) {
