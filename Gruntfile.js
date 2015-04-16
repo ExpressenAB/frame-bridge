@@ -82,7 +82,7 @@ module.exports = function(grunt) {
             var allFiles = [];
 
             config.jsFiles.forEach(function(f) {
-              allFiles.push('src/js/' + f);
+              allFiles.push('src/' + f);
             });
 
             return config.jsFiles.concat(allFiles);

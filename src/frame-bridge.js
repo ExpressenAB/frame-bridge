@@ -97,7 +97,7 @@
 
       } catch (e) {
         if (window.console && typeof window.console.log === 'function') {
-          window.console.log('Received message that could not be parsed.');
+          window.console.log(e);
         }
       }
     }

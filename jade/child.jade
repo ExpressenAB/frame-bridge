@@ -6,7 +6,9 @@ html
 
   body
     h1 Child
-    #output
+    #message-output
+    #return-value-output
+    #return-value-using-promise-output
 
     each jsFile in jsFiles
       script(src="js/#{jsFile}")
@@ -15,15 +17,33 @@ html
       (function(window) {
 
         var localApi = {
-          sayHello: function(message) {
-            document.getElementById('output').innerText = message;
+          printMessage: function(message) {
+            document.getElementById('message-output').innerText = message;
+          },
+          getReturnValue: function() {
+            return 'Return value from child';
+          },
+          getReturnValueUsingPromise: function(callback) {
+            var deferred = FrameBridge.defer();
+
+            setTimeout(function() {
+              deferred.resolve('Return value from child using promise');
+            }, 1000);
+
+            return deferred.promise;
           }
         };
 
         var frameBridge = FrameBridge.create(localApi, window.parent, '#{parentDomain}');
 
         frameBridge.init(function(remoteApi) {
-          remoteApi.sayHello('Hello from child');
+          remoteApi.printMessage('Hello from child');
+          remoteApi.getReturnValue().success(function(returnValue) {
+            document.getElementById('return-value-output').innerText = returnValue;
+          });
+          remoteApi.getReturnValueUsingPromise().success(function(returnValue) {
+            document.getElementById('return-value-using-promise-output').innerText = returnValue;
+          });
         });
 
       }(window));
