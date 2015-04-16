@@ -1,4 +1,7 @@
 .idea/
+node_modules/
+www-root/
+dist/
 
 .DS_Store
 

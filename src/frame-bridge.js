@@ -14,6 +14,7 @@
   }
 
 }(this, function () {
+  'use strict';
 
   // Events
   var Event = {

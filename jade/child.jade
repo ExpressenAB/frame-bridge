@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+
+  body
+    h1 Child
+    #output
+
+    each jsFile in jsFiles
+      script(src="js/#{jsFile}")
+
+    script.
+      (function(window) {
+
+        var localApi = {
+          sayHello: function(message) {
+            document.getElementById('output').innerText = message;
+          }
+        };
+
+        var frameBridge = FrameBridge.create(localApi, window.parent, '#{parentDomain}');
+
+        frameBridge.init(function(remoteApi) {
+          remoteApi.sayHello('Hello from child');
+        });
+
+      }(window));
+
+    if develop
+      script(src="//localhost:9001/livereload.js")
