@@ -1,0 +1,15 @@
+{
+  "name": "exp-frame-bridge",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {},
+  "author": "AB Kvällstidningen Expressen",
+  "contributors": [
+    "Daniel Lundin <d-dog@d-dog.se>",
+    "Johan Bjurling <johan.bjurling@gmail.com>"
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-requirejs": "~0.4.4"
+  }
+}
