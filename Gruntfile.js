@@ -78,7 +78,7 @@ module.exports = function(grunt) {
     uglify: {
       deploy: {
         files: {
-          '<%= buildFolder %>/js/frame-bridge-<%= pkg.version %>.min.js': (function() {
+          '<%= buildFolder %>/frame-bridge-<%= pkg.version %>.min.js': (function() {
             var allFiles = [];
 
             config.jsFiles.forEach(function(f) {
