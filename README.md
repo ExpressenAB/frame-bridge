@@ -31,7 +31,8 @@ var localApi = {
 
 ```javascript
 // Create the bridge object using the local api, the iframe's content window and the child domain.
-var frameBridge = FrameBridge.create(localApi, document.getElementById('iframe-id').contentWindow, 'http://child.domain.com');
+var contentWindow = document.getElementById('iframe-id').contentWindow;
+var frameBridge = FrameBridge.create(localApi, contentWindow, 'http://child.domain.com');
 ```
 
 **Child**
