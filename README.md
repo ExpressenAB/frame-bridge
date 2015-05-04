@@ -40,19 +40,19 @@ var localApiChild = {
 **Parent**
 
 ```javascript
-// Create the bridge object using the local api, the iframe's content window and the child domain.
+// Create the bridge object using the parent's local api, the iframe's content window and the child domain.
 var contentWindow = document.getElementById('iframe-id').contentWindow;
 var domain = 'http://child.domain.com';
-var frameBridge = FrameBridge.create(localApi, contentWindow, domain);
+var frameBridge = FrameBridge.create(localApiParent, contentWindow, domain);
 ```
 
 **Child**
 
 ```javascript
-// Create the bridge object using the local api, the parent window and the parent domain.
+// Create the bridge object using the child's local api, the parent window and the parent domain.
 var contentWindow = window.parent;
 var domain = 'http://parent.domain.com';
-var frameBridge = FrameBridge.create(localApi, contentWindow, domain);
+var frameBridge = FrameBridge.create(localApiChild, contentWindow, domain);
 ```
 
 4) Initialize the bridge in both parent and child
@@ -80,7 +80,7 @@ Returning values from the remote side can be done in one of two ways.
 **Returning the value directly**
 
 ```javascript
-var localApi = {
+var localApiParent = {
   getReturnValue: function() {
     return 'Return value';
   }
@@ -90,7 +90,7 @@ var localApi = {
 **Returning a promise that will later be resolved (or rejected)**
 
 ```javascript
-var localApi = {
+var localApiParent = {
   getReturnValueUsingPromise: function() {
     var deferred = FrameBridge.defer();
 
