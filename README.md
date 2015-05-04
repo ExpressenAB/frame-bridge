@@ -15,11 +15,21 @@ This module simplifies communication between a parent page and an embedded page 
 
 2) Setup the api to be exposed in both parent and child
 
-**Parent and child**
+**Parent**
 
 ```javascript
-var localApi = {
-  printMessage: function(message) {
+var localApiParent = {
+  printMessageFromChild: function(message) {
+    console.log(message);
+  }
+};
+```
+
+**Child**
+
+```javascript
+var localApiChild = {
+  printMessageFromParent: function(message) {
     console.log(message);
   }
 };
@@ -51,7 +61,7 @@ var frameBridge = FrameBridge.create(localApi, contentWindow, domain);
 
 ```javascript
 frameBridge.init(function(remoteApi) {
-  remoteApi.printMessage('Hello from parent');
+  remoteApi.printMessageFromParent('Hello from parent');
 });
 ```
 
@@ -59,7 +69,7 @@ frameBridge.init(function(remoteApi) {
 
 ```javascript
 frameBridge.init(function(remoteApi) {
-  remoteApi.printMessage('Hello from child');
+  remoteApi.printMessageFromChild('Hello from child');
 });
 ```
 
