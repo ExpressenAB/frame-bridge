@@ -1,11 +1,11 @@
 {
-  "name": "exp-frame-bridge",
+  "name": "frame-bridge",
   "version": "1.0.0",
   "description": "",
   "dependencies": {},
   "author": "AB Kvällstidningen Expressen",
   "contributors": [
-    "Daniel Lundin <d-dog@d-dog.se>",
+    "Daniel Lundin <daniel.t.lundin@gmail.com>",
     "Johan Bjurling <johan.bjurling@gmail.com>"
   ],
   "devDependencies": {
