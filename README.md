@@ -15,11 +15,21 @@ This module simplifies communication between a parent page and an embedded page 
 
 2) Setup the api to be exposed in both parent and child
 
-**Parent and child**
+**Parent**
 
 ```javascript
-var localApi = {
-  printMessage: function(message) {
+var localApiParent = {
+  printMessageFromChild: function(message) {
+    console.log(message);
+  }
+};
+```
+
+**Child**
+
+```javascript
+var localApiChild = {
+  printMessageFromParent: function(message) {
     console.log(message);
   }
 };
@@ -30,16 +40,19 @@ var localApi = {
 **Parent**
 
 ```javascript
-// Create the bridge object using the local api, the iframe's content window and the child domain.
+// Create the bridge object using the parent's local api, the iframe's content window and the child domain.
 var contentWindow = document.getElementById('iframe-id').contentWindow;
-var frameBridge = FrameBridge.create(localApi, contentWindow, 'http://child.domain.com');
+var domain = 'http://child.domain.com';
+var frameBridge = FrameBridge.create(localApiParent, contentWindow, domain);
 ```
 
 **Child**
 
 ```javascript
-// Create the bridge object using the local api, the parent window and the parent domain.
-var frameBridge = FrameBridge.create(localApi, window.parent, 'http://parent.domain.com');
+// Create the bridge object using the child's local api, the parent window and the parent domain.
+var contentWindow = window.parent;
+var domain = 'http://parent.domain.com';
+var frameBridge = FrameBridge.create(localApiChild, contentWindow, domain);
 ```
 
 4) Initialize the bridge in both parent and child
@@ -48,7 +61,7 @@ var frameBridge = FrameBridge.create(localApi, window.parent, 'http://parent.dom
 
 ```javascript
 frameBridge.init(function(remoteApi) {
-  remoteApi.printMessage('Hello from parent');
+  remoteApi.printMessageFromParent('Hello from parent');
 });
 ```
 
@@ -56,7 +69,7 @@ frameBridge.init(function(remoteApi) {
 
 ```javascript
 frameBridge.init(function(remoteApi) {
-  remoteApi.printMessage('Hello from child');
+  remoteApi.printMessageFromChild('Hello from child');
 });
 ```
 
@@ -67,7 +80,7 @@ Returning values from the remote side can be done in one of two ways.
 **Returning the value directly**
 
 ```javascript
-var localApi = {
+var localApiParent = {
   getReturnValue: function() {
     return 'Return value';
   }
@@ -77,7 +90,7 @@ var localApi = {
 **Returning a promise that will later be resolved (or rejected)**
 
 ```javascript
-var localApi = {
+var localApiParent = {
   getReturnValueUsingPromise: function() {
     var deferred = FrameBridge.defer();
 
@@ -90,7 +103,7 @@ var localApi = {
 };
 ```
 
-**The value will always be returned as a promise on the calling side of the bridge:**
+**The value will always be returned as a promise on the calling side of the bridge**
 
 ```javascript
 remoteApi.getReturnValue().success(function(returnValue) {
@@ -101,3 +114,8 @@ remoteApi.getReturnValueUsingPromise().success(function(returnValue) {
   console.log(returnValue); // 'Return value using promise'
 });
 ```
+
+## Develop
+
+- `npm install`
+- `grunt develop`
