@@ -19,8 +19,8 @@ html
     script.
       (function(window) {
 
-        var localApi = {
-          printMessage: function(message) {
+        var localApiParent = {
+          printMessageFromChild: function(message) {
             document.getElementById('message-output').innerText = message;
           },
           getReturnValue: function() {
@@ -37,10 +37,10 @@ html
           }
         };
 
-        var frameBridge = FrameBridge.create(localApi, document.getElementById('iframe-id').contentWindow, '#{childDomain}');
+        var frameBridge = FrameBridge.create(localApiParent, document.getElementById('iframe-id').contentWindow, '#{childDomain}');
 
         frameBridge.init(function(remoteApi) {
-          remoteApi.printMessage('Hello from parent');
+          remoteApi.printMessageFromParent('Hello from parent');
           remoteApi.getReturnValue().success(function(returnValue) {
             document.getElementById('return-value-output').innerText = returnValue;
           });

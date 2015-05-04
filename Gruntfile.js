@@ -77,8 +77,11 @@ module.exports = function(grunt) {
 
     uglify: {
       deploy: {
+        options: {
+          banner: '/*! Frame bridge v<%= pkg.version %> | Copyright (c) 2015, AB Kvällstidningen Expressen | https://github.com/ExpressenAB/frame-bridge */'
+        },
         files: {
-          '<%= buildFolder %>/frame-bridge-<%= pkg.version %>.min.js': (function() {
+          '<%= buildFolder %>/frame-bridge.min.js': (function() {
             var allFiles = [];
 
             config.jsFiles.forEach(function(f) {

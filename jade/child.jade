@@ -16,8 +16,8 @@ html
     script.
       (function(window) {
 
-        var localApi = {
-          printMessage: function(message) {
+        var localApiChild = {
+          printMessageFromParent: function(message) {
             document.getElementById('message-output').innerText = message;
           },
           getReturnValue: function() {
@@ -34,10 +34,10 @@ html
           }
         };
 
-        var frameBridge = FrameBridge.create(localApi, window.parent, '#{parentDomain}');
+        var frameBridge = FrameBridge.create(localApiChild, window.parent, '#{parentDomain}');
 
         frameBridge.init(function(remoteApi) {
-          remoteApi.printMessage('Hello from child');
+          remoteApi.printMessageFromChild('Hello from child');
           remoteApi.getReturnValue().success(function(returnValue) {
             document.getElementById('return-value-output').innerText = returnValue;
           });
