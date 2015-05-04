@@ -114,3 +114,8 @@ remoteApi.getReturnValueUsingPromise().success(function(returnValue) {
   console.log(returnValue); // 'Return value using promise'
 });
 ```
+
+## Develop
+
+- `npm install`
+- `grunt develop`
